@@ -1,0 +1,52 @@
+name: Supabase Keep-Alive
+
+on:
+  schedule:
+    # Runs at 00:00 every 3 days
+    - cron: '0 0 */3 * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+permissions:
+  contents: write # Required to push the commit back and reset the 60-day inactivity timer
+
+jobs:
+  ping_db:
+    name: Ping Database API
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Make Keep-Alive API Request
+        run: |
+          if [ -z "${{ secrets.SUPABASE_URL }}" ] || [ -z "${{ secrets.SUPABASE_ANON_KEY }}" ]; then
+            echo "::error::SUPABASE_URL or SUPABASE_ANON_KEY secret is missing. Go to Repository Settings -> Secrets to add them."
+            exit 1
+          fi
+          
+          echo "Pinging Supabase API to keep project active..."
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/settings?select=key" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
+          
+          echo "HTTP Response Status Code: $STATUS_CODE"
+          if [ "$STATUS_CODE" -lt 200 ] || [ "$STATUS_CODE" -ge 300 ]; then
+            echo "::warning::Non-2xx status code received: $STATUS_CODE"
+          fi
+
+      - name: Keep Repository Active (Prevent GitHub 60-day cron pause)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          mkdir -p .github/logs
+          echo "Keep-alive ping run successfully at $(date -u)" > .github/logs/keep-alive.log
+          
+          git add .github/logs/keep-alive.log
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "chore: keep-alive heartbeat [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi
+
