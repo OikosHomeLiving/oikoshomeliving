@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OIKΩs · Admin Dashboard</title>
-  <link rel="icon" type="image/png" href="oikosfavicon.png"/>
+  <title>OIKΩS Home Living · Admin Dashboard</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="oikosfavicon.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="oikosfavicon.png"/>
+  <link rel="shortcut icon" href="oikosfavicon.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="oikosfavicon.png"/>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Lucide Elegant Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -863,6 +866,59 @@
 
 
         <button class="save-btn" onclick="saveSettings()" style="margin-top: 0; max-width: 600px;">Αποθήκευση Ρυθμίσεων</button>
+
+        <!-- SEASONAL RATES CARD -->
+        <div class="setting-card" style="box-shadow: 0 4px 20px rgba(0,0,0,.01); border: 1px solid var(--border); margin-top: 28px; margin-bottom: 28px; max-width: 600px;">
+          <div class="setting-title" style="display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="calendar" style="width: 18px; height: 18px; color: var(--gold);"></i> Εποχιακές Τιμές (Seasonal Rates)
+          </div>
+          
+          <div style="margin-bottom: 24px; padding: 18px; background: rgba(26,25,23,.015); border: 1px solid var(--border);">
+            <div style="font-family: var(--f-serif); font-size: 0.95rem; font-weight: 500; margin-bottom: 16px;">Προσθήκη Εποχιακής Τιμής</div>
+            <div class="form-row" style="grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+              <div class="f-group" style="margin-bottom:0;"><label class="f-label">Όνομα Περιόδου</label><input class="f-input" type="text" id="sr_name" placeholder="π.χ. High Season"/></div>
+              <div class="f-group" style="margin-bottom:0;"><label class="f-label">Τιμή / νύχτα (€)</label><input class="f-input" type="number" id="sr_price" placeholder="110"/></div>
+            </div>
+            <div class="form-row" style="grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+              <div class="f-group" style="margin-bottom:0;"><label class="f-label">Από (Start Date)</label><input class="f-input" type="date" id="sr_from"/></div>
+              <div class="f-group" style="margin-bottom:0;"><label class="f-label">Έως (End Date)</label><input class="f-input" type="date" id="sr_to"/></div>
+            </div>
+            <button class="save-btn" onclick="addSeasonalRate()" style="margin-top: 8px; padding: 10px; font-size: 0.72rem; max-width: 180px;">Προσθήκη Περιόδου</button>
+          </div>
+
+          <div id="seasonalRatesTableWrapper">
+            <div class="loading">Φόρτωση...</div>
+          </div>
+        </div>
+
+        <!-- PROMO CODES CARD -->
+        <div class="setting-card" style="box-shadow: 0 4px 20px rgba(0,0,0,.01); border: 1px solid var(--border); margin-bottom: 28px; max-width: 600px;">
+          <div class="setting-title" style="display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="tag" style="width: 18px; height: 18px; color: var(--gold);"></i> Κωδικοί Προσφοράς (Promo Codes)
+          </div>
+          
+          <div style="margin-bottom: 24px; padding: 18px; background: rgba(26,25,23,.015); border: 1px solid var(--border);">
+            <div style="font-family: var(--f-serif); font-size: 0.95rem; font-weight: 500; margin-bottom: 16px;">Προσθήκη Promo Code</div>
+            <div class="form-row" style="grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+              <div class="f-group" style="margin-bottom:0;"><label class="f-label">Κωδικός (Code)</label><input class="f-input" type="text" id="pc_code" placeholder="WELCOME10" style="text-transform: uppercase;"/></div>
+              <div class="f-group" style="margin-bottom:0;"><label class="f-label">Έκπτωση (Value)</label><input class="f-input" type="number" id="pc_value" placeholder="10"/></div>
+            </div>
+            <div class="form-row" style="grid-template-columns: 1fr; margin-bottom: 12px;">
+              <div class="f-group" style="margin-bottom:0;">
+                <label class="f-label">Τύπος (Type)</label>
+                <select class="f-input" id="pc_type" style="height: 38px; background: var(--light);">
+                  <option value="percentage">Ποσοστό (%)</option>
+                  <option value="fixed">Σταθερό Ποσό (€)</option>
+                </select>
+              </div>
+            </div>
+            <button class="save-btn" onclick="addPromoCode()" style="margin-top: 8px; padding: 10px; font-size: 0.72rem; max-width: 180px;">Προσθήκη Promo</button>
+          </div>
+
+          <div id="promoCodesTableWrapper">
+            <div class="loading">Φόρτωση...</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -939,6 +995,17 @@
           <option value="confirmed" selected>Επιβεβαιωμένη</option>
           <option value="pending">Εκκρεμής</option>
         </select>
+      </div>
+    </div>
+
+    <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+      <div class="dev-input-group">
+        <label class="dev-label">Κωδικός Έκπτωσης (Promo Code)</label>
+        <input class="dev-input" type="text" id="add_promo_code" placeholder="WELCOME10" style="text-transform: uppercase;" oninput="autoCalcAddPrice()"/>
+      </div>
+      <div class="dev-input-group">
+        <label class="dev-label">Έκπτωση (€)</label>
+        <input class="dev-input" type="number" id="add_discount_amount" readonly value="0" style="background: rgba(26,25,23,0.05); cursor: not-allowed;"/>
       </div>
     </div>
 
@@ -1032,6 +1099,17 @@
           <option value="pending">Εκκρεμής</option>
           <option value="cancelled">Ακυρωμένη</option>
         </select>
+      </div>
+    </div>
+
+    <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+      <div class="dev-input-group">
+        <label class="dev-label">Κωδικός Έκπτωσης (Promo Code)</label>
+        <input class="dev-input" type="text" id="edit_promo_code" placeholder="WELCOME10" style="text-transform: uppercase;" oninput="autoCalcEditPrice()"/>
+      </div>
+      <div class="dev-input-group">
+        <label class="dev-label">Έκπτωση (€)</label>
+        <input class="dev-input" type="number" id="edit_discount_amount" readonly value="0" style="background: rgba(26,25,23,0.05); cursor: not-allowed;"/>
       </div>
     </div>
 
@@ -1155,6 +1233,10 @@
   let chartEndDate = new Date();
   let allBookings = [], blockedDates = [];
 
+  // Seasonal rates & promo codes global states
+  let seasonalRates = [];
+  let promoCodesList = [];
+
   // Demo Fallback Data Storage in localStorage
   let defaultDemoBookings = [
     {id:'1',guest_name:'Maria Konstantinou',guest_email:'maria@example.com',guest_phone:'+30693000001',check_in:'2026-07-10',check_out:'2026-07-14',nights:4,total_price:347,status:'confirmed',source:'website'},
@@ -1173,6 +1255,17 @@
     min_nights: '2',
     extra_guest_charge: '15'
   };
+
+  let defaultDemoSeasonalRates = [
+    {id:'sr1', name:'High Season (July)', date_from:'2026-07-01', date_to:'2026-07-31', price_per_night: 110},
+    {id:'sr2', name:'Peak Season (August)', date_from:'2026-08-01', date_to:'2026-08-31', price_per_night: 130},
+    {id:'sr3', name:'September Promo', date_from:'2026-09-01', date_to:'2026-09-15', price_per_night: 95}
+  ];
+
+  let defaultDemoPromoCodes = [
+    {code:'WELCOME10', type:'percentage', value: 10, is_active: true},
+    {code:'DIRECT20', type:'fixed', value: 20, is_active: true}
+  ];
 
   // Sync helpers
   function getLocalBookings() {
@@ -1209,6 +1302,48 @@
   }
   function setLocalSettings(obj) {
     localStorage.setItem('oikos_demo_settings', JSON.stringify(obj));
+  }
+
+  async function loadSeasonalRatesAndPromos() {
+    if (isDemoMode) {
+      seasonalRates = getLocalSeasonalRates();
+      promoCodesList = getLocalPromoCodes();
+    } else if (sb) {
+      try {
+        const [r1, r2] = await Promise.all([
+          sb.from('seasonal_rates').select('*').order('date_from'),
+          sb.from('promo_codes').select('*').order('created_at')
+        ]);
+        seasonalRates = r1.data || [];
+        promoCodesList = r2.data || [];
+      } catch (e) {
+        console.error("Failed to load seasonal rates and promo codes:", e);
+      }
+    }
+  }
+
+  function getLocalSeasonalRates() {
+    let sr = localStorage.getItem('oikos_demo_seasonal_rates');
+    if (!sr) {
+      localStorage.setItem('oikos_demo_seasonal_rates', JSON.stringify(defaultDemoSeasonalRates));
+      return defaultDemoSeasonalRates;
+    }
+    return JSON.parse(sr);
+  }
+  function setLocalSeasonalRates(arr) {
+    localStorage.setItem('oikos_demo_seasonal_rates', JSON.stringify(arr));
+  }
+
+  function getLocalPromoCodes() {
+    let pc = localStorage.getItem('oikos_demo_promo_codes');
+    if (!pc) {
+      localStorage.setItem('oikos_demo_promo_codes', JSON.stringify(defaultDemoPromoCodes));
+      return defaultDemoPromoCodes;
+    }
+    return JSON.parse(pc);
+  }
+  function setLocalPromoCodes(arr) {
+    localStorage.setItem('oikos_demo_promo_codes', JSON.stringify(arr));
   }
 
   // AUTH
@@ -1253,7 +1388,9 @@
 
     
     document.getElementById('dashDate').textContent=new Date().toLocaleDateString('el-GR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-    loadDashboard();
+    loadSeasonalRatesAndPromos().then(() => {
+      loadDashboard();
+    });
     lucide.createIcons();
   }
 
@@ -1555,7 +1692,11 @@
     
     document.getElementById('bookingsTable').innerHTML=`<div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table><thead><tr><th>Επισκέπτης</th><th>Επικοινωνία</th><th>Άφιξη</th><th>Αναχώρηση</th><th>Σύνολο</th><th>Status</th><th>Ενέργειες</th></tr></thead><tbody>
       ${bk.map(b=>`<tr>
-        <td><strong>${esc(b.guest_name)}</strong><br><span style="color:var(--mid);font-size:.72rem">${esc(b.source||'website')}</span></td>
+        <td>
+          <strong>${esc(b.guest_name)}</strong><br>
+          <span style="color:var(--mid);font-size:.72rem">${esc(b.source||'website')}</span>
+          ${b.promo_code ? `<br><span style="color:var(--gold);font-size:.70rem;font-weight:500;white-space:nowrap;"><i data-lucide="tag" style="width:10px;height:10px;display:inline-block;vertical-align:middle;margin-right:2px;margin-top:-2px;"></i>${esc(b.promo_code)} (-€${b.discount_amount})</span>` : ''}
+        </td>
         <td style="font-size:.75rem">${esc(b.guest_email)}<br>${esc(b.guest_phone||'—')}</td>
         <td>${fmt(b.check_in)}</td><td>${fmt(b.check_out)}</td>
         <td>${b.total_price?'€'+b.total_price:'—'}</td>
@@ -1845,7 +1986,11 @@
   }
 
   // SETTINGS
+  // SETTINGS
   async function loadSettings(){
+    await loadSeasonalRates();
+    await loadPromoCodes();
+
     if(isDemoMode){ 
       let settings = getLocalSettings();
       Object.keys(settings).forEach(k => {
@@ -1890,6 +2035,304 @@
       const{error}=await sb.from('settings').upsert(upserts,{onConflict:'key'});
       if(error){showToast('Σφάλμα αποθήκευσης','error');return;}
       showToast('Αποθηκεύτηκε','ok');
+    }
+  }
+
+  // SEASONAL RATES MANAGEMENT
+  async function loadSeasonalRates() {
+    let sr;
+    if (isDemoMode) {
+      sr = getLocalSeasonalRates();
+    } else if (sb) {
+      try {
+        const r = await sb.from('seasonal_rates').select('*').order('date_from');
+        sr = r.data;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    seasonalRates = sr || [];
+    renderSeasonalRates();
+  }
+
+  function renderSeasonalRates() {
+    const el = document.getElementById('seasonalRatesTableWrapper');
+    if (!el) return;
+    
+    if (!seasonalRates.length) {
+      el.innerHTML = `
+        <div class="empty" style="padding: 24px 0;">
+          <i data-lucide="tag" class="empty-icon-svg"></i>
+          <div class="empty-txt">Δεν υπάρχουν εποχιακές τιμές</div>
+        </div>
+      `;
+      lucide.createIcons();
+      return;
+    }
+    
+    el.innerHTML = `
+      <div style="overflow-x:auto; width:100%; margin-top: 16px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Όνομα</th>
+              <th>Από</th>
+              <th>Έως</th>
+              <th>Τιμή / Νύχτα</th>
+              <th>Ενέργεια</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${seasonalRates.map(r => `
+              <tr>
+                <td><strong>${esc(r.name)}</strong></td>
+                <td>${fmt(r.date_from)}</td>
+                <td>${fmt(r.date_to)}</td>
+                <td><strong>€${r.price_per_night}</strong></td>
+                <td>
+                  <button class="act-btn delete-btn" onclick="deleteSeasonalRate('${r.id}')" style="color:var(--danger); margin-right: 0;"><i data-lucide="trash-2" class="btn-icon"></i>Αφαίρεση</button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+    lucide.createIcons();
+  }
+
+  async function addSeasonalRate() {
+    const name = document.getElementById('sr_name').value.trim();
+    const from = document.getElementById('sr_from').value;
+    const to = document.getElementById('sr_to').value;
+    const price = document.getElementById('sr_price').value;
+    
+    if (!name || !from || !to || !price) {
+      showToast('Συμπλήρωσε όλα τα πεδία', 'error');
+      return;
+    }
+    if (from > to) {
+      showToast('"Από" πρέπει να είναι πριν το "Έως"', 'error');
+      return;
+    }
+    
+    const rateData = {
+      name,
+      date_from: from,
+      date_to: to,
+      price_per_night: +price
+    };
+    
+    if (isDemoMode) {
+      let list = getLocalSeasonalRates();
+      rateData.id = 'sr_' + Date.now();
+      list.push(rateData);
+      setLocalSeasonalRates(list);
+      showToast('Προστέθηκε εποχιακή τιμή', 'ok');
+      document.getElementById('sr_name').value = '';
+      document.getElementById('sr_from').value = '';
+      document.getElementById('sr_to').value = '';
+      document.getElementById('sr_price').value = '';
+      await loadSeasonalRates();
+      return;
+    }
+    
+    if (sb) {
+      const { error } = await sb.from('seasonal_rates').insert(rateData);
+      if (error) {
+        showToast('Σφάλμα κατά την αποθήκευση', 'error');
+        return;
+      }
+      showToast('Προστέθηκε εποχιακή τιμή', 'ok');
+      document.getElementById('sr_name').value = '';
+      document.getElementById('sr_from').value = '';
+      document.getElementById('sr_to').value = '';
+      document.getElementById('sr_price').value = '';
+      await loadSeasonalRates();
+    }
+  }
+
+  async function deleteSeasonalRate(id) {
+    if (!confirm('Διαγραφή αυτής της εποχιακής τιμής;')) return;
+    
+    if (isDemoMode) {
+      let list = getLocalSeasonalRates();
+      list = list.filter(r => r.id !== id);
+      setLocalSeasonalRates(list);
+      showToast('Διαγράφηκε', 'ok');
+      await loadSeasonalRates();
+      return;
+    }
+    
+    if (sb) {
+      const { error } = await sb.from('seasonal_rates').delete().eq('id', id);
+      if (error) {
+        showToast('Σφάλμα κατά τη διαγραφή', 'error');
+        return;
+      }
+      showToast('Διαγράφηκε', 'ok');
+      await loadSeasonalRates();
+    }
+  }
+
+  // PROMO CODES MANAGEMENT
+  async function loadPromoCodes() {
+    let pc;
+    if (isDemoMode) {
+      pc = getLocalPromoCodes();
+    } else if (sb) {
+      try {
+        const r = await sb.from('promo_codes').select('*').order('created_at');
+        pc = r.data;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    promoCodesList = pc || [];
+    renderPromoCodes();
+  }
+
+  function renderPromoCodes() {
+    const el = document.getElementById('promoCodesTableWrapper');
+    if (!el) return;
+    
+    if (!promoCodesList.length) {
+      el.innerHTML = `
+        <div class="empty" style="padding: 24px 0;">
+          <i data-lucide="tag" class="empty-icon-svg"></i>
+          <div class="empty-txt">Δεν υπάρχουν κωδικοί προσφοράς</div>
+        </div>
+      `;
+      lucide.createIcons();
+      return;
+    }
+    
+    el.innerHTML = `
+      <div style="overflow-x:auto; width:100%; margin-top: 16px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Κωδικός</th>
+              <th>Τύπος</th>
+              <th>Έκπτωση</th>
+              <th>Κατάσταση</th>
+              <th>Ενέργεια</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${promoCodesList.map(c => `
+              <tr>
+                <td><strong>${esc(c.code)}</strong></td>
+                <td>${c.type === 'percentage' ? 'Ποσοστό (%)' : 'Σταθερό Ποσό (€)'}</td>
+                <td><strong>${c.type === 'percentage' ? c.value + '%' : '€' + c.value}</strong></td>
+                <td>
+                  <span class="badge ${c.is_active ? 'badge-confirmed' : 'badge-cancelled'}" onclick="togglePromoActive('${c.code}', ${c.is_active})" style="cursor: pointer;">
+                    ${c.is_active ? 'Ενεργός' : 'Ανενεργός'}
+                  </span>
+                </td>
+                <td>
+                  <button class="act-btn delete-btn" onclick="deletePromoCode('${c.code}')" style="color:var(--danger); margin-right: 0;"><i data-lucide="trash-2" class="btn-icon"></i>Αφαίρεση</button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+    lucide.createIcons();
+  }
+
+  async function addPromoCode() {
+    const code = document.getElementById('pc_code').value.trim().toUpperCase();
+    const type = document.getElementById('pc_type').value;
+    const value = document.getElementById('pc_value').value;
+    
+    if (!code || !value) {
+      showToast('Συμπλήρωσε όλα τα πεδία', 'error');
+      return;
+    }
+    
+    const promoData = {
+      code,
+      type,
+      value: +value,
+      is_active: true
+    };
+    
+    if (isDemoMode) {
+      let list = getLocalPromoCodes();
+      if (list.some(p => p.code === code)) {
+        showToast('Ο κωδικός υπάρχει ήδη', 'error');
+        return;
+      }
+      list.push(promoData);
+      setLocalPromoCodes(list);
+      showToast('Προστέθηκε ο κωδικός', 'ok');
+      document.getElementById('pc_code').value = '';
+      document.getElementById('pc_value').value = '';
+      await loadPromoCodes();
+      return;
+    }
+    
+    if (sb) {
+      const { error } = await sb.from('promo_codes').insert(promoData);
+      if (error) {
+        showToast('Σφάλμα: Ο κωδικός υπάρχει ήδη ή είναι λανθασμένος', 'error');
+        return;
+      }
+      showToast('Προστέθηκε ο κωδικός', 'ok');
+      document.getElementById('pc_code').value = '';
+      document.getElementById('pc_value').value = '';
+      await loadPromoCodes();
+    }
+  }
+
+  async function deletePromoCode(code) {
+    if (!confirm('Διαγραφή αυτού του κωδικού προσφοράς;')) return;
+    
+    if (isDemoMode) {
+      let list = getLocalPromoCodes();
+      list = list.filter(p => p.code !== code);
+      setLocalPromoCodes(list);
+      showToast('Διαγράφηκε', 'ok');
+      await loadPromoCodes();
+      return;
+    }
+    
+    if (sb) {
+      const { error } = await sb.from('promo_codes').delete().eq('code', code);
+      if (error) {
+        showToast('Σφάλμα κατά τη διαγραφή', 'error');
+        return;
+      }
+      showToast('Διαγράφηκε', 'ok');
+      await loadPromoCodes();
+    }
+  }
+
+  async function togglePromoActive(code, currentStatus) {
+    const nextStatus = !currentStatus;
+    
+    if (isDemoMode) {
+      let list = getLocalPromoCodes();
+      let item = list.find(p => p.code === code);
+      if (item) {
+        item.is_active = nextStatus;
+        setLocalPromoCodes(list);
+        showToast(nextStatus ? 'Ενεργοποιήθηκε' : 'Απενεργοποιήθηκε', 'ok');
+        await loadPromoCodes();
+      }
+      return;
+    }
+    
+    if (sb) {
+      const { error } = await sb.from('promo_codes').update({ is_active: nextStatus }).eq('code', code);
+      if (error) {
+        showToast('Σφάλμα κατά την ενημέρωση', 'error');
+        return;
+      }
+      showToast(nextStatus ? 'Ενεργοποιήθηκε' : 'Απενεργοποιήθηκε', 'ok');
+      await loadPromoCodes();
     }
   }
 
@@ -1976,6 +2419,32 @@
     document.getElementById('addBookingModal').classList.remove('open');
   }
 
+  function calculateBasePriceForDates(checkIn, checkOut, baseRate) {
+    let totalBase = 0;
+    let d = new Date(checkIn);
+    const e = new Date(checkOut);
+    while (d < e) {
+      const dateStr = d.toISOString().split('T')[0];
+      const rate = seasonalRates.find(r => dateStr >= r.date_from && dateStr <= r.date_to);
+      totalBase += rate ? +rate.price_per_night : baseRate;
+      d.setDate(d.getDate() + 1);
+    }
+    return totalBase;
+  }
+
+  function calculatePromoDiscount(promoCode, basePrice) {
+    if (!promoCode) return 0;
+    const codeUpper = promoCode.trim().toUpperCase();
+    const found = promoCodesList.find(pc => pc.code === codeUpper && pc.is_active);
+    if (!found) return 0;
+    if (found.type === 'percentage') {
+      return Math.round(basePrice * +found.value / 100);
+    } else if (found.type === 'fixed') {
+      return +found.value;
+    }
+    return 0;
+  }
+
   function autoCalcAddPrice() {
     const ci = document.getElementById('add_check_in').value;
     const co = document.getElementById('add_check_out').value;
@@ -1997,10 +2466,17 @@
       cleaning = (cleaningVal !== undefined && cleaningVal !== '') ? +cleaningVal : 25;
       svcPct = (svcPctVal !== undefined && svcPctVal !== '') ? +svcPctVal : 12;
     }
-    const base = n * rate;
+    
+    const base = calculateBasePriceForDates(ci, co, rate);
     const svc = Math.round(base * svcPct / 100);
-    const total = base + cleaning + svc;
-    document.getElementById('add_total_price').value = total;
+    
+    const promoCode = document.getElementById('add_promo_code').value;
+    const discount = calculatePromoDiscount(promoCode, base);
+    
+    document.getElementById('add_discount_amount').value = discount;
+    
+    const total = base + cleaning + svc - discount;
+    document.getElementById('add_total_price').value = Math.max(total, 0);
   }
 
   async function submitAddBooking() {
@@ -2014,6 +2490,8 @@
     const status = document.getElementById('add_status').value;
     const price = +document.getElementById('add_total_price').value;
     const notes = document.getElementById('add_notes').value.trim();
+    const promoCode = document.getElementById('add_promo_code').value.trim().toUpperCase() || null;
+    const discount = +document.getElementById('add_discount_amount').value || 0;
 
     if(!name || !email || !ci || !co || !price) {
       showToast('Παρακαλώ συμπλήρωσε όλα τα υποχρεωτικά πεδία.', 'error');
@@ -2037,7 +2515,9 @@
       total_price: price,
       status: status,
       source: source,
-      notes: notes || null
+      notes: notes || null,
+      promo_code: promoCode,
+      discount_amount: discount
     };
 
     if(isDemoMode) {
@@ -2082,6 +2562,8 @@
     document.getElementById('edit_status').value = bk.status || 'pending';
     document.getElementById('edit_total_price').value = bk.total_price || '';
     document.getElementById('edit_notes').value = bk.notes || '';
+    document.getElementById('edit_promo_code').value = bk.promo_code || '';
+    document.getElementById('edit_discount_amount').value = bk.discount_amount || 0;
     
     document.getElementById('editBookingModal').classList.add('open');
     lucide.createIcons();
@@ -2112,10 +2594,17 @@
       cleaning = (cleaningVal !== undefined && cleaningVal !== '') ? +cleaningVal : 25;
       svcPct = (svcPctVal !== undefined && svcPctVal !== '') ? +svcPctVal : 12;
     }
-    const base = n * rate;
+    
+    const base = calculateBasePriceForDates(ci, co, rate);
     const svc = Math.round(base * svcPct / 100);
-    const total = base + cleaning + svc;
-    document.getElementById('edit_total_price').value = total;
+    
+    const promoCode = document.getElementById('edit_promo_code').value;
+    const discount = calculatePromoDiscount(promoCode, base);
+    
+    document.getElementById('edit_discount_amount').value = discount;
+    
+    const total = base + cleaning + svc - discount;
+    document.getElementById('edit_total_price').value = Math.max(total, 0);
   }
 
   async function submitEditBooking() {
@@ -2130,6 +2619,8 @@
     const status = document.getElementById('edit_status').value;
     const price = +document.getElementById('edit_total_price').value;
     const notes = document.getElementById('edit_notes').value.trim();
+    const promoCode = document.getElementById('edit_promo_code').value.trim().toUpperCase() || null;
+    const discount = +document.getElementById('edit_discount_amount').value || 0;
 
     if(!name || !email || !ci || !co || !price) {
       showToast('Παρακαλώ συμπλήρωσε όλα τα υποχρεωτικά πεδία.', 'error');
@@ -2152,7 +2643,9 @@
       total_price: price,
       status: status,
       source: source,
-      notes: notes || null
+      notes: notes || null,
+      promo_code: promoCode,
+      discount_amount: discount
     };
 
     if(isDemoMode) {
