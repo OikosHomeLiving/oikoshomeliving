@@ -60,11 +60,12 @@
 
     // Media Database for Photo Carousel & Lightbox
     const galleryImages = [
-      { src: "images/room.png", title_el: "Ο Χώρος", title_en: "The Space", sub_el: "Ενιαίος, μοντέρνος σχεδιασμός & ζεστή ατμόσφαιρα", sub_en: "Open-plan, modern design & warm ambiance" },
-      { src: "images/couch.png", title_el: "Καθιστικό", title_en: "Living Area", sub_el: "Άνετος modular καναπές με κομψές λεπτομέρειες", sub_en: "Comfortable modular sofa with elegant details" },
-      { src: "images/picture1.png", title_el: "Υπνοδωμάτιο (Λεπτομέρεια)", title_en: "Bedroom (Detail)", sub_el: "Premium bouclé κρεβάτι & minimal κομοδίνο", sub_en: "Premium bouclé bed & minimal nightstand" },
-      { src: "images/bath1.png", title_el: "Μπάνιο", title_en: "Bathroom", sub_el: "Μοντέρνα αισθητική, διπλός νιπτήρας & LED καθρέφτης", sub_en: "Modern aesthetics, double vessel sinks & LED mirror" },
-      { src: "images/double.png", title_el: "Γωνιές του Σπιτιού", title_en: "House Highlights", sub_el: "Προσεκτικά επιλεγμένα έπιπλα & διακοσμητικά στοιχεία", sub_en: "Carefully curated furniture & decorative elements" },
+      { src: "images/room.webp", title_el: "Ο Χώρος", title_en: "The Space", sub_el: "Ενιαίος, μοντέρνος σχεδιασμός & ζεστή ατμόσφαιρα", sub_en: "Open-plan, modern design & warm ambiance" },
+      { src: "images/couch.webp", title_el: "Καθιστικό", title_en: "Living Area", sub_el: "Άνετος modular καναπές με κομψές λεπτομέρειες", sub_en: "Comfortable modular sofa with elegant details" },
+      { src: "images/picture1.webp", title_el: "Υπνοδωμάτιο (Λεπτομέρεια)", title_en: "Bedroom (Detail)", sub_el: "Premium bouclé κρεβάτι & minimal κομοδίνο", sub_en: "Premium bouclé bed & minimal nightstand" },
+      { src: "images/bath1.webp", title_el: "Μπάνιο", title_en: "Bathroom", sub_el: "Μοντέρνα αισθητική, διπλός νιπτήρας & LED καθρέφτης", sub_en: "Modern aesthetics, double vessel sinks & LED mirror" },
+      { src: "images/yard.webp", title_el: "Αυλή & Είσοδος", title_en: "Private Patio & Entrance", sub_el: "Γραφικό καθιστικό στην είσοδο του studio", sub_en: "Charming outdoor seating area at the studio entrance" },
+      { src: "images/double.webp", title_el: "Γωνιές του Σπιτιού", title_en: "House Highlights", sub_el: "Προσεκτικά επιλεγμένα έπιπλα & διακοσμητικά στοιχεία", sub_en: "Carefully curated furniture & decorative elements" },
       { src: "images/mastichari-beach-kos.webp", title_el: "Παραλία Μαστιχαρίου", title_en: "Mastichari Beach nearby", sub_el: "Χρυσή άμμος & καταγάλανα νερά (30μ. από το σπίτι)", sub_en: "Golden sand & crystal clear waters (30m from the house)" }
     ];
     let activeLightboxIndex = 0;
