@@ -136,7 +136,11 @@
         seo_lead: "Ψάχνετε για το ιδανικό μέρος διαμονής στο Μαστιχάρι της Κω; Το OIKΩS Home Living προσφέρει μια απαράμιλλη εμπειρία μίνιμαλ πολυτέλειας. Βρισκόμαστε μόλις 30 μέτρα από τη χρυσή άμμο της παραλίας του Μαστιχαρίου, συνδυάζοντας κορυφαίες σύγχρονες παροχές με τη γαλήνια ατμόσφαιρα ενός από τα πιο όμορφα παραθαλάσσια χωριά της Κω.",
         seo_text_1: "Είτε επισκέπτεστε την Κω για windsurfing, είτε για να εξερευνήσετε τα τοπικά αξιοθέατα, είτε απλά για να χαλαρώσετε δίπλα στα καταγάλανα νερά του Αιγαίου, η επιλογή διαμονής στο Μαστιχάρι είναι το κλειδί για τις διακοπές σας. Το OIKΩS βρίσκεται στο απόλυτο κέντρο, πράγμα που σημαίνει ότι απέχετε λιγότερο από 1 λεπτό με τα πόδια από παραδοσιακές ταβέρνες, φούρνους, σούπερ μάρκετ και το λιμάνι με καθημερινά δρομολόγια για Κάλυμνο.",
         seo_text_2: "Απολαύστε premium άνεση με γρήγορο WiFi (50Mbps), ανατομικά στρώματα, κλιματισμό και ελεύθερο πάρκινγκ κοντά. Κάντε την κράτησή σας απευθείας μαζί μας για εγγύηση καλύτερης τιμής.",
-        gdpr_consent_text: "Συμφωνώ με την επεξεργασία των προσωπικών μου δεδομένων για τη διαχείριση της αίτησης κράτησης."
+        gdpr_consent_text: "Συμφωνώ με την επεξεργασία των προσωπικών μου δεδομένων για τη διαχείριση της αίτησης κράτησης.",
+        seo_h1: "OIKΩS Home Living | Ενοικιαζόμενο Studio & Διαμέρισμα στο Μαστιχάρι, Κως",
+        seo_title: "OIKΩS Home Living | Ενοικιαζόμενο Studio & Διαμέρισμα στο Μαστιχάρι, Κως",
+        seo_desc: "Ψάχνετε ενοικιαζόμενο διαμέρισμα ή studio στο Μαστιχάρι της Κω; Το OIKΩS Home Living προσφέρει premium μίνιμαλ διαμονή δίπλα στη θάλασσα, πρόσφατα ανακαινισμένο (2026).",
+        seo_keywords: "ενοικιαζόμενα δωμάτια μαστιχάρι κως, ενοικιαζόμενα διαμερίσματα μαστιχάρι κως, ενοικίαση studio κως, ενοικίαση διαμερίσματος κως, διαμονή μαστιχάρι κως, rent an apartment kos, vacation rental mastichari, studio apartment kos, oikos home living, boutique studio rental greece"
       },
       en: {
         nav_space: "Space", nav_amenities: "Amenities", nav_reviews: "Reviews", nav_location: "Location", nav_book: "Book",
@@ -191,7 +195,11 @@
         seo_lead: "Looking for the best place to stay in Mastichari, Kos? OIKΩS Home Living offers an unparalleled minimalist luxury experience. Located just 30 meters from the golden sands of Mastichari beach, our boutique studio combines top-tier modern amenities with the serene, laid-back atmosphere of one of Kos's most beautiful coastal villages.",
         seo_text_1: "Whether you are visiting Kos for windsurfing, exploring local attractions, or simply wanting to relax by the crystal-clear Aegean Sea, choosing where to stay in Mastichari is key to your vacation. OIKΩS is situated in the absolute center, meaning you are less than a 1-minute walk from local family-run tavernas, bakeries, supermarkets, and the port with daily ferries to Kalymnos.",
         seo_text_2: "Experience premium comfort with fast WiFi (50Mbps), custom linens, air conditioning, and free parking nearby. Book your stay directly with us for best-rate guarantees.",
-        gdpr_consent_text: "I consent to the processing of my personal data for the purpose of coordinating this booking."
+        gdpr_consent_text: "I consent to the processing of my personal data for the purpose of coordinating this booking.",
+        seo_h1: "OIKΩS Home Living | Vacation Rental Studio & Apartment in Mastichari, Kos",
+        seo_title: "OIKΩS Home Living | Vacation Rental Studio & Apartment in Mastichari, Kos",
+        seo_desc: "Looking for an apartment to rent or a studio in Mastichari, Kos? OIKΩS Home Living offers premium minimalist vacation rentals, just 30m from the beach.",
+        seo_keywords: "rent an apartment kos, vacation rental mastichari, studio apartment kos, oikos home living, boutique studio rental greece, rent apartment mastichari, kos holiday rental, rent studio kos"
       }
     };
     let currentLang = 'el';
@@ -1105,6 +1113,39 @@
           el.innerHTML = translations[lang][key];
         }
       });
+
+      // Dynamic Title, Description & Keywords for advanced SEO
+      if (translations[lang]) {
+        if (translations[lang].seo_title) {
+          document.title = translations[lang].seo_title;
+        }
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc && translations[lang].seo_desc) {
+          metaDesc.setAttribute('content', translations[lang].seo_desc);
+        }
+        const metaKeywords = document.querySelector('meta[name="keywords"]');
+        if (metaKeywords && translations[lang].seo_keywords) {
+          metaKeywords.setAttribute('content', translations[lang].seo_keywords);
+        }
+        // Open Graph
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle && translations[lang].seo_title) {
+          ogTitle.setAttribute('content', translations[lang].seo_title);
+        }
+        const ogDesc = document.querySelector('meta[property="og:description"]');
+        if (ogDesc && translations[lang].seo_desc) {
+          ogDesc.setAttribute('content', translations[lang].seo_desc);
+        }
+        // Twitter
+        const twTitle = document.querySelector('meta[name="twitter:title"]');
+        if (twTitle && translations[lang].seo_title) {
+          twTitle.setAttribute('content', translations[lang].seo_title);
+        }
+        const twDesc = document.querySelector('meta[name="twitter:description"]');
+        if (twDesc && translations[lang].seo_desc) {
+          twDesc.setAttribute('content', translations[lang].seo_desc);
+        }
+      }
 
       // Inputs placeholders translation
       const placeholders = {
