@@ -60,12 +60,12 @@
 
     // Media Database for Photo Carousel & Lightbox
     const galleryImages = [
-      { src: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=70", title_el: "Καθιστικό", title_en: "Living Area", sub_el: "Μίνιμαλ Σχεδιασμός & Φυσικά Υλικά", sub_en: "Minimal Design & Natural Materials" },
-      { src: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=70", title_el: "Υπνοδωμάτιο", title_en: "Bedroom", sub_el: "Ήρεμοι Τόνοι & Ζεστός Φωτισμός", sub_en: "Warm Lighting & Cozy Linens" },
-      { src: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=70", title_el: "Μπάνιο", title_en: "Bathroom", sub_el: "Μοντέρνα Αισθητική & Πέτρινα Στοιχεία", sub_en: "Modern Stoneware & Clean Geometry" },
-      { src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=70", title_el: "Βεράντα", title_en: "Outdoor Patio", sub_el: "Γραφική βεράντα & χαλάρωση", sub_en: "Scenic patio & relaxation" },
-      { src: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=70", title_el: "Κουζίνα", title_en: "Kitchen & Dining", sub_el: "Πλήρως Εξοπλισμένη με Σύγχρονες Συσκευές", sub_en: "Fully Equipped Cooking Utensils & Espresso Machine" },
-      { src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=70", title_el: "Παραλία Μαστιχαρίου", title_en: "Mastichari Beach nearby", sub_el: "Χρυσή Άμμος & Καταγάλανα Νερά (30μ.)", sub_en: "Soft Sand & Crystal Clear Aegean Sea (30m away)" }
+      { src: "images/room.png", title_el: "Ο Χώρος", title_en: "The Space", sub_el: "Ενιαίος, μοντέρνος σχεδιασμός & ζεστή ατμόσφαιρα", sub_en: "Open-plan, modern design & warm ambiance" },
+      { src: "images/couch.png", title_el: "Καθιστικό", title_en: "Living Area", sub_el: "Άνετος modular καναπές με κομψές λεπτομέρειες", sub_en: "Comfortable modular sofa with elegant details" },
+      { src: "images/picture1.png", title_el: "Υπνοδωμάτιο (Λεπτομέρεια)", title_en: "Bedroom (Detail)", sub_el: "Premium bouclé κρεβάτι & minimal κομοδίνο", sub_en: "Premium bouclé bed & minimal nightstand" },
+      { src: "images/bath1.png", title_el: "Μπάνιο", title_en: "Bathroom", sub_el: "Μοντέρνα αισθητική, διπλός νιπτήρας & LED καθρέφτης", sub_en: "Modern aesthetics, double vessel sinks & LED mirror" },
+      { src: "images/double.png", title_el: "Γωνιές του Σπιτιού", title_en: "House Highlights", sub_el: "Προσεκτικά επιλεγμένα έπιπλα & διακοσμητικά στοιχεία", sub_en: "Carefully curated furniture & decorative elements" },
+      { src: "images/mastichari-beach-kos.webp", title_el: "Παραλία Μαστιχαρίου", title_en: "Mastichari Beach nearby", sub_el: "Χρυσή άμμος & καταγάλανα νερά (30μ. από το σπίτι)", sub_en: "Golden sand & crystal clear waters (30m from the house)" }
     ];
     let activeLightboxIndex = 0;
     let activeGalleryIndex = 0;
@@ -91,7 +91,7 @@
         gallery_eyebrow: "Ο Χώρος", gallery_title: "Μίνιμαλ. Μοντέρνο. <em>Σπίτι.</em>",
         amenities_eyebrow: "Τι Περιλαμβάνεται", amenities_title: "Όλα όσα χρειάζεσαι.",
         amenity_ac: "A/C & Θέρμανση", amenity_ac_desc: "Κλιματισμός σε όλους τους χώρους",
-        amenity_wifi: "WiFi Fiber", amenity_wifi_desc: "100Mbps υψηλής ταχύτητας",
+        amenity_wifi: "Γρήγορο WiFi", amenity_wifi_desc: "Σταθερή σύνδεση 50Mbps",
         amenity_kitchen: "Πλήρης κουζίνα", amenity_kitchen_desc: "Εστία, φούρνος, καφετιέρα, σκεύη",
         amenity_parking: "Πάρκινγκ κοντά", amenity_parking_desc: "Ελεύθερο πάρκινγκ κοντά στο σπίτι",
         amenity_laundry: "Πλυντήριο", amenity_laundry_desc: "Πλυντήριο & στεγνωτήριο",
@@ -135,7 +135,7 @@
         price_discount: "Έκπτωση",
         seo_lead: "Ψάχνετε για το ιδανικό μέρος διαμονής στο Μαστιχάρι της Κω; Το OIKΩS Home Living προσφέρει μια απαράμιλλη εμπειρία μίνιμαλ πολυτέλειας. Βρισκόμαστε μόλις 30 μέτρα από τη χρυσή άμμο της παραλίας του Μαστιχαρίου, συνδυάζοντας κορυφαίες σύγχρονες παροχές με τη γαλήνια ατμόσφαιρα ενός από τα πιο όμορφα παραθαλάσσια χωριά της Κω.",
         seo_text_1: "Είτε επισκέπτεστε την Κω για windsurfing, είτε για να εξερευνήσετε τα τοπικά αξιοθέατα, είτε απλά για να χαλαρώσετε δίπλα στα καταγάλανα νερά του Αιγαίου, η επιλογή διαμονής στο Μαστιχάρι είναι το κλειδί για τις διακοπές σας. Το OIKΩS βρίσκεται στο απόλυτο κέντρο, πράγμα που σημαίνει ότι απέχετε λιγότερο από 1 λεπτό με τα πόδια από παραδοσιακές ταβέρνες, φούρνους, σούπερ μάρκετ και το λιμάνι με καθημερινά δρομολόγια για Κάλυμνο.",
-        seo_text_2: "Απολαύστε premium άνεση με γρήγορο WiFi (Fiber), ανατομικά στρώματα, κλιματισμό και ελεύθερο πάρκινγκ κοντά. Κάντε την κράτησή σας απευθείας μαζί μας για εγγύηση καλύτερης τιμής.",
+        seo_text_2: "Απολαύστε premium άνεση με γρήγορο WiFi (50Mbps), ανατομικά στρώματα, κλιματισμό και ελεύθερο πάρκινγκ κοντά. Κάντε την κράτησή σας απευθείας μαζί μας για εγγύηση καλύτερης τιμής.",
         gdpr_consent_text: "Συμφωνώ με την επεξεργασία των προσωπικών μου δεδομένων για τη διαχείριση της αίτησης κράτησης."
       },
       en: {
@@ -146,7 +146,7 @@
         gallery_eyebrow: "The Space", gallery_title: "Minimal. Modern. <em>Home.</em>",
         amenities_eyebrow: "What's Included", amenities_title: "Everything you need.",
         amenity_ac: "A/C & Heating", amenity_ac_desc: "Climate control in all spaces",
-        amenity_wifi: "Fiber WiFi", amenity_wifi_desc: "100Mbps high-speed connection",
+        amenity_wifi: "Fast WiFi", amenity_wifi_desc: "Stable 50Mbps connection",
         amenity_kitchen: "Full Kitchen", amenity_kitchen_desc: "Stove, oven, coffee machine, utensils",
         amenity_parking: "Free Parking Nearby", amenity_parking_desc: "Free of charge parking near the house",
         amenity_laundry: "Washing Machine", amenity_laundry_desc: "Washer & dryer utility provided",
@@ -190,7 +190,7 @@
         price_discount: "Discount",
         seo_lead: "Looking for the best place to stay in Mastichari, Kos? OIKΩS Home Living offers an unparalleled minimalist luxury experience. Located just 30 meters from the golden sands of Mastichari beach, our boutique studio combines top-tier modern amenities with the serene, laid-back atmosphere of one of Kos's most beautiful coastal villages.",
         seo_text_1: "Whether you are visiting Kos for windsurfing, exploring local attractions, or simply wanting to relax by the crystal-clear Aegean Sea, choosing where to stay in Mastichari is key to your vacation. OIKΩS is situated in the absolute center, meaning you are less than a 1-minute walk from local family-run tavernas, bakeries, supermarkets, and the port with daily ferries to Kalymnos.",
-        seo_text_2: "Experience premium comfort with high-speed fiber WiFi, custom linens, air conditioning, and free parking nearby. Book your stay directly with us for best-rate guarantees.",
+        seo_text_2: "Experience premium comfort with fast WiFi (50Mbps), custom linens, air conditioning, and free parking nearby. Book your stay directly with us for best-rate guarantees.",
         gdpr_consent_text: "I consent to the processing of my personal data for the purpose of coordinating this booking."
       }
     };
