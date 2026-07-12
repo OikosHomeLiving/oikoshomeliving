@@ -64,8 +64,9 @@
       { src: "images/couch.webp", title_el: "Καθιστικό", title_en: "Living Area", sub_el: "Άνετος modular καναπές με κομψές λεπτομέρειες", sub_en: "Comfortable modular sofa with elegant details" },
       { src: "images/picture1.webp", title_el: "Υπνοδωμάτιο (Λεπτομέρεια)", title_en: "Bedroom (Detail)", sub_el: "Premium bouclé κρεβάτι & minimal κομοδίνο", sub_en: "Premium bouclé bed & minimal nightstand" },
       { src: "images/bath1.webp", title_el: "Μπάνιο", title_en: "Bathroom", sub_el: "Μοντέρνα αισθητική, διπλός νιπτήρας & LED καθρέφτης", sub_en: "Modern aesthetics, double vessel sinks & LED mirror" },
-      { src: "images/yard.webp", title_el: "Αυλή & Είσοδος", title_en: "Private Patio & Entrance", sub_el: "Γραφικό καθιστικό στην είσοδο του studio", sub_en: "Charming outdoor seating area at the studio entrance" },
+      { src: "images/kitchen.webp", title_el: "Κουζίνα", title_en: "Kitchen", sub_el: "Μοντέρνα, πλήρως εξοπλισμένη κουζίνα με συσκευές", sub_en: "Modern, fully equipped kitchen with appliances" },
       { src: "images/double.webp", title_el: "Γωνιές του Σπιτιού", title_en: "House Highlights", sub_el: "Προσεκτικά επιλεγμένα έπιπλα & διακοσμητικά στοιχεία", sub_en: "Carefully curated furniture & decorative elements" },
+      { src: "images/yard.webp", title_el: "Αυλή & Είσοδος", title_en: "Private Patio & Entrance", sub_el: "Γραφικό καθιστικό στην είσοδο του studio", sub_en: "Charming outdoor seating area at the studio entrance" },
       { src: "images/mastichari-beach-kos.webp", title_el: "Παραλία Μαστιχαρίου", title_en: "Mastichari Beach nearby", sub_el: "Χρυσή άμμος & καταγάλανα νερά (30μ. από το σπίτι)", sub_en: "Golden sand & crystal clear waters (30m from the house)" }
     ];
     let activeLightboxIndex = 0;
@@ -901,6 +902,34 @@
       }
     }
 
+    function getVisibleCardsCount() {
+      if (window.innerWidth <= 640) return 1;
+      if (window.innerWidth <= 980) return 2;
+      return 3;
+    }
+
+    function updateGalleryIndicators() {
+      const visibleCards = getVisibleCardsCount();
+      const maxIndex = galleryImages.length - visibleCards;
+      
+      if (activeGalleryIndex > maxIndex) {
+        activeGalleryIndex = maxIndex;
+      }
+
+      document.querySelectorAll('.indicator-dot').forEach((dot, idx) => {
+        if (idx > maxIndex) {
+          dot.style.display = 'none';
+        } else {
+          dot.style.display = 'block';
+          if (idx === activeGalleryIndex) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        }
+      });
+    }
+
     // PHOTO CAROUSEL BUILDER
     function buildGalleryCarousel() {
       const track = document.getElementById('galleryTrack');
@@ -916,26 +945,27 @@
         card.className = 'gallery-card';
         card.setAttribute('onclick', `openLightbox(${index})`);
         card.innerHTML = `
-        <img src="${img.src}" alt="${title}" loading="lazy"/>
-        <div class="gallery-card-info">
-          <h4 class="gallery-card-title">${title}</h4>
-          <p class="gallery-card-sub">${sub}</p>
-        </div>
-      `;
+          <img src="${img.src}" alt="${title}" loading="lazy"/>
+          <div class="gallery-card-info">
+            <h4 class="gallery-card-title">${title}</h4>
+            <p class="gallery-card-sub">${sub}</p>
+          </div>
+        `;
         track.appendChild(card);
 
-        // Indicator dots (only show 4 indicators since it scrolls by card step)
-        if (index <= galleryImages.length - 3) {
-          const dot = document.createElement('div');
-          dot.className = `indicator-dot ${index === 0 ? 'active' : ''}`;
-          dot.setAttribute('onclick', `jumpToGallery(${index})`);
-          indContainer.appendChild(dot);
-        }
+        // Indicator dots (create a dot for every image, will hide non-applicable dynamically)
+        const dot = document.createElement('div');
+        dot.className = `indicator-dot ${index === 0 ? 'active' : ''}`;
+        dot.setAttribute('onclick', `jumpToGallery(${index})`);
+        indContainer.appendChild(dot);
       });
+
+      updateGalleryIndicators();
     }
 
     function moveGallery(dir) {
-      const maxIndex = galleryImages.length - 3; // 3 items visible at once
+      const visibleCards = getVisibleCardsCount();
+      const maxIndex = galleryImages.length - visibleCards;
       let target = activeGalleryIndex + dir;
 
       // Loop boundary check
@@ -946,22 +976,25 @@
     }
 
     function jumpToGallery(index) {
+      const visibleCards = getVisibleCardsCount();
+      const maxIndex = galleryImages.length - visibleCards;
+      
+      // Clamp target index
+      if (index < 0) index = 0;
+      if (index > maxIndex) index = maxIndex;
+
       activeGalleryIndex = index;
       const track = document.getElementById('galleryTrack');
 
       // Calculate translate percentage based on screen size
       let cardWidthPct = 33.333; // 3 cards visible
-      if (window.innerWidth <= 980) cardWidthPct = 50; // 2 cards visible
-      if (window.innerWidth <= 640) cardWidthPct = 100; // 1 card visible
+      if (visibleCards === 2) cardWidthPct = 50; // 2 cards visible
+      if (visibleCards === 1) cardWidthPct = 100; // 1 card visible
 
       const gap = 20;
-      track.style.transform = `translateX(calc(-${index * cardWidthPct}% - ${index * (gap / 3)}px))`;
+      track.style.transform = `translateX(calc(-${index * cardWidthPct}% - ${index * (gap / visibleCards)}px))`;
 
-      // Update active dot indicators
-      document.querySelectorAll('.indicator-dot').forEach((dot, idx) => {
-        if (idx === index) dot.classList.add('active');
-        else dot.classList.remove('active');
-      });
+      updateGalleryIndicators();
     }
 
     // REVIEWS CAROUSEL BUILDER
