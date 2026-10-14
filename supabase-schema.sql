@@ -23,7 +23,11 @@ INSERT INTO settings (key, value) VALUES
 ('cleaning_fee', '25'),
 ('service_fee_pct', '12'),
 ('min_nights', '2'),
-('extra_guest_charge', '15')
+('extra_guest_charge', '15'),
+('airbnb_score', '4.84'),
+('airbnb_reviews', '19'),
+('booking_score', '9.8'),
+('booking_reviews', '4')
 ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
 
 -- 2b. CREATE SEASONAL RATES TABLE

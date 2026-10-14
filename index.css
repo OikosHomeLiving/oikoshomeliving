@@ -2391,3 +2391,452 @@
     body.dark-theme footer {
       background: #11100E !important;
     }
+
+    /* ── LOCATION / MAP SECTION ── */
+    #location {
+      padding: 80px 24px;
+    }
+
+    .map-header {
+      max-width: 900px;
+      margin: 0 auto 40px;
+    }
+
+    .location-layout {
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(26,25,23,.10);
+    }
+
+    #map {
+      width: 100%;
+      height: 420px;
+      background: var(--linen);
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      #map {
+        height: 280px;
+      }
+    }
+
+    /* Leaflet popup font override */
+    .leaflet-popup-content-wrapper {
+      border-radius: 10px !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,.15) !important;
+    }
+
+    /* ── PLATFORM RATING BADGES ── */
+    #platform-badges {
+      padding: 64px 24px 72px;
+      text-align: center;
+    }
+
+    .badges-label {
+      font-family: var(--f-mono);
+      font-size: 0.78rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+
+    .badges-row {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .platform-badge {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 36px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      box-shadow: 0 4px 18px rgba(26,25,23,.06);
+      min-width: 270px;
+    }
+
+    .platform-badge:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(26,25,23,.12);
+      border-color: var(--gold);
+    }
+
+    .badge-logo {
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+
+    .badge-info {
+      text-align: left;
+    }
+
+    .badge-score {
+      font-family: var(--f-serif);
+      font-size: 1.45rem;
+      font-weight: 700;
+      line-height: 1.15;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-stars {
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: .08em;
+    }
+
+    .badge-platform {
+      font-size: 0.82rem;
+      color: var(--mid);
+      letter-spacing: .03em;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* Dark mode badges */
+    body.dark-theme .platform-badge {
+      background: #1C1B19;
+      border-color: rgba(255,255,255,.08);
+      box-shadow: 0 4px 18px rgba(0,0,0,.3);
+    }
+
+    body.dark-theme .platform-badge:hover {
+      border-color: var(--gold);
+      box-shadow: 0 12px 32px rgba(0,0,0,.45);
+    }
+
+    /* ==========================================================================
+       LOCAL GUIDE & DESTINATION SHOWCASE
+       ========================================================================== */
+    .local-guide-section {
+      background: linear-gradient(180deg, rgba(237, 232, 225, 0.4) 0%, var(--linen) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 110px 6vw;
+      position: relative;
+    }
+
+    .local-guide-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .guide-eyebrow-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      background: rgba(184, 150, 90, 0.12);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(184, 150, 90, 0.25);
+    }
+
+    .guide-eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 8px rgba(184, 150, 90, 0.6);
+    }
+
+    .guide-main-title {
+      margin-bottom: 24px;
+      line-height: 1.22;
+    }
+
+    .guide-lead-card {
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid var(--gold);
+      margin-bottom: 30px;
+    }
+
+    .guide-lead-text {
+      font-family: var(--f-serif);
+      font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+      line-height: 1.7;
+      color: var(--ink);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .guide-highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .guide-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(26, 25, 23, 0.08);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--ink);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+
+    .guide-chip:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+      background: #fff;
+      box-shadow: 0 6px 16px rgba(26, 25, 23, 0.06);
+    }
+
+    .guide-chip-icon {
+      width: 17px;
+      height: 17px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .guide-action-row {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .guide-explore-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ink);
+      color: #fff;
+      padding: 13px 26px;
+      border-radius: 30px;
+      font-size: 0.84rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+      box-shadow: 0 4px 14px rgba(26, 25, 23, 0.15);
+    }
+
+    .guide-explore-btn:hover {
+      background: var(--gold);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(184, 150, 90, 0.3);
+    }
+
+    .guide-btn-arrow {
+      transition: transform .2s ease;
+      font-size: 1rem;
+    }
+
+    .guide-explore-btn:hover .guide-btn-arrow {
+      transform: translateX(4px);
+    }
+
+    .guide-book-link {
+      font-size: 0.86rem;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      transition: color .2s ease, border-color .2s ease;
+    }
+
+    .guide-book-link:hover {
+      color: var(--gold);
+    }
+
+    /* Right column visual */
+    .local-guide-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .guide-image-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(26, 25, 23, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      aspect-ratio: 16 / 10;
+    }
+
+    .guide-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .guide-image-card:hover .guide-photo {
+      transform: scale(1.04);
+    }
+
+    .guide-image-badge {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(26, 25, 23, 0.82);
+      backdrop-filter: blur(12px);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.76rem;
+      font-family: var(--f-mono);
+      letter-spacing: 0.05em;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    }
+
+    .guide-narrative-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 24px 26px;
+      border: 1px solid rgba(26, 25, 23, 0.08);
+      box-shadow: 0 8px 24px rgba(26, 25, 23, 0.04);
+    }
+
+    .guide-narrative-p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 18px;
+    }
+
+    .guide-direct-callout {
+      background: #FAF8F5;
+      border: 1px solid rgba(184, 150, 90, 0.28);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .guide-direct-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .guide-direct-sparkle {
+      color: var(--gold);
+      font-size: 0.85rem;
+    }
+
+    .guide-direct-tag {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .guide-direct-text {
+      font-size: 0.84rem;
+      color: var(--ink);
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    /* Dark Mode Support */
+    body.dark-theme .local-guide-section {
+      background: linear-gradient(180deg, #141312 0%, #171615 100%);
+      border-color: rgba(255, 255, 255, 0.07);
+    }
+
+    body.dark-theme .guide-chip {
+      background: rgba(30, 29, 27, 0.75);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: #E8E6E3;
+    }
+
+    body.dark-theme .guide-chip:hover {
+      background: #252422;
+      border-color: var(--gold);
+    }
+
+    body.dark-theme .guide-narrative-card {
+      background: #1C1B19;
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    body.dark-theme .guide-direct-callout {
+      background: rgba(184, 150, 90, 0.08);
+      border-color: rgba(184, 150, 90, 0.3);
+    }
+
+    body.dark-theme .guide-direct-text {
+      color: #E0DDD9;
+    }
+
+    body.dark-theme .guide-lead-text {
+      color: #F0EDE8;
+    }
+
+    body.dark-theme .guide-explore-btn {
+      background: var(--gold);
+      color: #1A1917;
+    }
+
+    body.dark-theme .guide-explore-btn:hover {
+      background: #D4AF37;
+    }
+
+    body.dark-theme .guide-book-link {
+      color: #E0DDD9;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .local-guide-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .local-guide-section {
+        padding: 80px 6vw;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .guide-highlights-grid {
+        grid-template-columns: 1fr;
+      }
+      .guide-action-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .guide-explore-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }

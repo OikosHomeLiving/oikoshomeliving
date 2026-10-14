@@ -26,7 +26,11 @@
     let demoSettings = {
       price_per_night: 75,
       cleaning_fee: 25,
-      service_fee_pct: 12
+      service_fee_pct: 12,
+      airbnb_score: '4.84',
+      airbnb_reviews: '19',
+      booking_score: '9.8',
+      booking_reviews: '4'
     };
 
     let demoBookings = JSON.parse(localStorage.getItem('oikos_demo_bookings')) || [
@@ -44,6 +48,10 @@
     let EXTRA_GUEST_CHARGE = 15;
     let AMA_NUMBER = '';
     let QUIET_HOURS = '22:00 - 09:00';
+    let AIRBNB_SCORE = '4.84';
+    let AIRBNB_REVIEWS = '19';
+    let BOOKING_SCORE = '9.8';
+    let BOOKING_REVIEWS = '4';
     let bookedDates = new Set(), blockedDates = new Set();
     let viewYear = new Date().getFullYear(), viewMonth = new Date().getMonth();
 
@@ -93,7 +101,7 @@
         gallery_eyebrow: "Ο Χώρος", gallery_title: "Μίνιμαλ. Μοντέρνο. <em>Σπίτι.</em>",
         amenities_eyebrow: "Τι Περιλαμβάνεται", amenities_title: "Όλα όσα χρειάζεσαι.",
         amenity_ac: "A/C & Θέρμανση", amenity_ac_desc: "Κλιματισμός σε όλους τους χώρους",
-        amenity_wifi: "Γρήγορο WiFi", amenity_wifi_desc: "Σταθερή σύνδεση 50Mbps",
+        amenity_wifi: "Γρήγορο WiFi", amenity_wifi_desc: "Σταθερή σύνδεση 100Mbps",
         amenity_kitchen: "Πλήρης κουζίνα", amenity_kitchen_desc: "Εστία, φούρνος, καφετιέρα, σκεύη",
         amenity_parking: "Πάρκινγκ κοντά", amenity_parking_desc: "Ελεύθερο πάρκινγκ κοντά στο σπίτι",
         amenity_laundry: "Πλυντήριο", amenity_laundry_desc: "Πλυντήριο & στεγνωτήριο",
@@ -131,13 +139,24 @@
         loc_market: "Super market & Φούρνος", loc_market_dist: "100μ · 1 λεπτό με τα πόδια",
         loc_kos: "Πόλη της Κω (Κέντρο / Λιμάνι)", loc_kos_dist: "22km · 25 λεπτά με αυτοκίνητο",
         footer_rules: "Κανόνες",
+        badges_label: "Αξιολογημένο σε πλατφόρμες",
+        badge_reviews: "κριτικές",
         modal_success_title: "Η αίτησή σου στάλθηκε.", modal_success_desc: "Θα επικοινωνήσουμε μαζί σου εντός 24 ωρών για επιβεβαίωση. Σ' ευχαριστούμε!", modal_success_btn: "Κλείσιμο",
         modal_close_btn: "Κλείσιμο",
         book_promo_label: "Κωδικός Προσφοράς",
         price_discount: "Έκπτωση",
+        guide_eyebrow: "Τοπικός Οδηγός & Εμπειρία",
+        guide_title: "Πού να μείνετε στο <em>Μαστιχάρι, Κως</em>",
+        guide_pill_beach: "30μ από την παραλία",
+        guide_pill_dining: "1' από ταβέρνες & market",
+        guide_pill_ferry: "Λιμάνι για Κάλυμνο",
+        guide_pill_wifi: "100Mbps Ultra WiFi",
+        guide_view_map: "Εξερεύνηση στον χάρτη",
+        guide_direct_badge: "ΠΡΟΝΟΜΙΟ ΑΠΕΥΘΕΙΑΣ ΚΡΑΤΗΣΗΣ",
+        guide_photo_tag: "Μαστιχάρι · 30μ από το OIKΩS",
         seo_lead: "Ψάχνετε για το ιδανικό μέρος διαμονής στο Μαστιχάρι της Κω; Το OIKΩS Home Living προσφέρει μια απαράμιλλη εμπειρία μίνιμαλ πολυτέλειας. Βρισκόμαστε μόλις 30 μέτρα από τη χρυσή άμμο της παραλίας του Μαστιχαρίου, συνδυάζοντας κορυφαίες σύγχρονες παροχές με τη γαλήνια ατμόσφαιρα ενός από τα πιο όμορφα παραθαλάσσια χωριά της Κω.",
         seo_text_1: "Είτε επισκέπτεστε την Κω για windsurfing, είτε για να εξερευνήσετε τα τοπικά αξιοθέατα, είτε απλά για να χαλαρώσετε δίπλα στα καταγάλανα νερά του Αιγαίου, η επιλογή διαμονής στο Μαστιχάρι είναι το κλειδί για τις διακοπές σας. Το OIKΩS βρίσκεται στο απόλυτο κέντρο, πράγμα που σημαίνει ότι απέχετε λιγότερο από 1 λεπτό με τα πόδια από παραδοσιακές ταβέρνες, φούρνους, σούπερ μάρκετ και το λιμάνι με καθημερινά δρομολόγια για Κάλυμνο.",
-        seo_text_2: "Απολαύστε premium άνεση με γρήγορο WiFi (50Mbps), ανατομικά στρώματα, κλιματισμό και ελεύθερο πάρκινγκ κοντά. Κάντε την κράτησή σας απευθείας μαζί μας για εγγύηση καλύτερης τιμής.",
+        seo_text_2: "Απολαύστε premium άνεση με γρήγορο WiFi (100Mbps), ανατομικά στρώματα, κλιματισμό και ελεύθερο πάρκινγκ κοντά. Κάντε την κράτησή σας απευθείας μαζί μας για εγγύηση καλύτερης τιμής.",
         gdpr_consent_text: "Συμφωνώ με την επεξεργασία των προσωπικών μου δεδομένων για τη διαχείριση της αίτησης κράτησης.",
         seo_h1: "OIKΩS Home Living | Ενοικιαζόμενο Studio & Διαμέρισμα στο Μαστιχάρι, Κως",
         seo_title: "OIKΩS Home Living | Ενοικιαζόμενο Studio & Διαμέρισμα στο Μαστιχάρι, Κως",
@@ -152,7 +171,7 @@
         gallery_eyebrow: "The Space", gallery_title: "Minimal. Modern. <em>Home.</em>",
         amenities_eyebrow: "What's Included", amenities_title: "Everything you need.",
         amenity_ac: "A/C & Heating", amenity_ac_desc: "Climate control in all spaces",
-        amenity_wifi: "Fast WiFi", amenity_wifi_desc: "Stable 50Mbps connection",
+        amenity_wifi: "Fast WiFi", amenity_wifi_desc: "Stable 100Mbps connection",
         amenity_kitchen: "Full Kitchen", amenity_kitchen_desc: "Stove, oven, coffee machine, utensils",
         amenity_parking: "Free Parking Nearby", amenity_parking_desc: "Free of charge parking near the house",
         amenity_laundry: "Washing Machine", amenity_laundry_desc: "Washer & dryer utility provided",
@@ -190,13 +209,24 @@
         loc_market: "Supermarket & Bakery", loc_market_dist: "100m · 1 minute walk",
         loc_kos: "Kos Town (Center / Port)", loc_kos_dist: "22km · 25 minutes drive",
         footer_rules: "Rules",
+        badges_label: "Rated across platforms",
+        badge_reviews: "reviews",
         modal_success_title: "Request submitted.", modal_success_desc: "We will contact you within 24 hours to confirm your reservation. Thank you!", modal_success_btn: "Close",
         modal_close_btn: "Close",
         book_promo_label: "Promo Code",
         price_discount: "Discount",
+        guide_eyebrow: "Local Guide & Experience",
+        guide_title: "Where to Stay in <em>Mastichari, Kos</em>",
+        guide_pill_beach: "30m from the beach",
+        guide_pill_dining: "1 min to tavernas & market",
+        guide_pill_ferry: "Ferry to Kalymnos",
+        guide_pill_wifi: "100Mbps Ultra WiFi",
+        guide_view_map: "Explore on map",
+        guide_direct_badge: "DIRECT BOOKING BENEFIT",
+        guide_photo_tag: "Mastichari · 30m from OIKΩS",
         seo_lead: "Looking for the best place to stay in Mastichari, Kos? OIKΩS Home Living offers an unparalleled minimalist luxury experience. Located just 30 meters from the golden sands of Mastichari beach, our boutique studio combines top-tier modern amenities with the serene, laid-back atmosphere of one of Kos's most beautiful coastal villages.",
         seo_text_1: "Whether you are visiting Kos for windsurfing, exploring local attractions, or simply wanting to relax by the crystal-clear Aegean Sea, choosing where to stay in Mastichari is key to your vacation. OIKΩS is situated in the absolute center, meaning you are less than a 1-minute walk from local family-run tavernas, bakeries, supermarkets, and the port with daily ferries to Kalymnos.",
-        seo_text_2: "Experience premium comfort with fast WiFi (50Mbps), custom linens, air conditioning, and free parking nearby. Book your stay directly with us for best-rate guarantees.",
+        seo_text_2: "Experience premium comfort with fast WiFi (100Mbps), custom linens, air conditioning, and free parking nearby. Book your stay directly with us for best-rate guarantees.",
         gdpr_consent_text: "I consent to the processing of my personal data for the purpose of coordinating this booking.",
         seo_h1: "OIKΩS Home Living | Vacation Rental Studio & Apartment in Mastichari, Kos",
         seo_title: "OIKΩS Home Living | Vacation Rental Studio & Apartment in Mastichari, Kos",
@@ -213,6 +243,10 @@
           cleaning: CLEANING,
           svc_pct: SVC_PCT,
           extra_guest_charge: EXTRA_GUEST_CHARGE,
+          airbnb_score: AIRBNB_SCORE,
+          airbnb_reviews: AIRBNB_REVIEWS,
+          booking_score: BOOKING_SCORE,
+          booking_reviews: BOOKING_REVIEWS,
           booked: Array.from(bookedDates),
           blocked: Array.from(blockedDates),
           seasonal_rates: seasonalRates,
@@ -234,6 +268,10 @@
           CLEANING = cache.cleaning !== undefined ? +cache.cleaning : 25;
           SVC_PCT = cache.svc_pct !== undefined ? +cache.svc_pct : 12;
           EXTRA_GUEST_CHARGE = cache.extra_guest_charge !== undefined ? +cache.extra_guest_charge : 15;
+          if (cache.airbnb_score !== undefined) AIRBNB_SCORE = cache.airbnb_score;
+          if (cache.airbnb_reviews !== undefined) AIRBNB_REVIEWS = cache.airbnb_reviews;
+          if (cache.booking_score !== undefined) BOOKING_SCORE = cache.booking_score;
+          if (cache.booking_reviews !== undefined) BOOKING_REVIEWS = cache.booking_reviews;
           bookedDates = new Set(cache.booked || []);
           blockedDates = new Set(cache.blocked || []);
           seasonalRates = cache.seasonal_rates || [];
@@ -279,6 +317,10 @@
           if (r.key === 'cleaning_fee') CLEANING = +r.value;
           if (r.key === 'service_fee_pct') SVC_PCT = +r.value;
           if (r.key === 'extra_guest_charge') EXTRA_GUEST_CHARGE = +r.value;
+          if (r.key === 'airbnb_score') AIRBNB_SCORE = r.value;
+          if (r.key === 'airbnb_reviews') AIRBNB_REVIEWS = r.value;
+          if (r.key === 'booking_score') BOOKING_SCORE = r.value;
+          if (r.key === 'booking_reviews') BOOKING_REVIEWS = r.value;
         });
         if (b) b.forEach(r => {
           let d = new Date(r.check_in), e = new Date(r.check_out);
@@ -296,6 +338,7 @@
         document.getElementById('cleaningFee').textContent = '€' + CLEANING;
         updateHouseRulesTime();
         updateAMAFooter();
+        renderPlatformBadges();
         buildCalendar();
         updatePrice();
         console.log("Supabase database sync complete.");
@@ -339,6 +382,7 @@
       if (pDisp) pDisp.textContent = RATE;
       document.getElementById('cleaningFee').textContent = '€' + CLEANING;
       updateAMAFooter();
+      renderPlatformBadges();
 
       // Default check-in/out dates
       const t = new Date(); t.setDate(t.getDate() + 1);
@@ -429,6 +473,11 @@
       RATE = demoSettings.price_per_night;
       CLEANING = demoSettings.cleaning_fee;
       SVC_PCT = demoSettings.service_fee_pct;
+      AIRBNB_SCORE = demoSettings.airbnb_score || '4.84';
+      AIRBNB_REVIEWS = demoSettings.airbnb_reviews || '19';
+      BOOKING_SCORE = demoSettings.booking_score || '9.8';
+      BOOKING_REVIEWS = demoSettings.booking_reviews || '4';
+      renderPlatformBadges();
 
       seasonalRates = JSON.parse(localStorage.getItem('oikos_demo_seasonal_rates')) || [
         { id: 'sr1', name: 'High Season (July)', date_from: '2026-07-01', date_to: '2026-07-31', price_per_night: 110 },
@@ -872,14 +921,33 @@
 
     // LEAFLET MAP & TRAVEL GUIDE
     function initLeafletMap() {
+      // Leaflet is deferred; retry until L is available (up to 2 seconds)
+      if (typeof L === 'undefined') {
+        let attempts = 0;
+        const waitForLeaflet = setInterval(() => {
+          attempts++;
+          if (typeof L !== 'undefined') {
+            clearInterval(waitForLeaflet);
+            _doInitLeafletMap();
+          } else if (attempts >= 20) {
+            clearInterval(waitForLeaflet);
+            const mapEl = document.getElementById('map');
+            if (mapEl) mapEl.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--mid);font-family:var(--f-mono);font-size:.75rem">📍 Map unavailable – check internet connection.</div>`;
+          }
+        }, 100);
+        return;
+      }
+      _doInitLeafletMap();
+    }
+
+    function _doInitLeafletMap() {
       try {
         const villaCoords = [36.8497694, 27.0757225];
         leafletMap = L.map('map', { scrollWheelZoom: false }).setView(villaCoords, 15);
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          subdomains: 'abcd',
-          maxZoom: 20
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          maxZoom: 19
         }).addTo(leafletMap);
 
         const goldIcon = L.icon({
@@ -1073,6 +1141,11 @@
 
     // LIVE WEATHER FETCH (OPEN-METEO)
     async function fetchLiveWeather() {
+      // Show static fallback immediately while we wait for API
+      const el = document.getElementById('weatherText');
+      if (el && lastTemp === null) {
+        el.textContent = currentLang === 'el' ? 'Μαστιχάρι, Κως' : 'Mastichari, Kos';
+      }
       try {
         const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=36.8498&longitude=27.0757&current=temperature_2m,weather_code");
         const data = await res.json();
@@ -1085,9 +1158,8 @@
         }
       } catch (e) {
         console.warn("Could not retrieve current weather metrics:", e);
-        if (lastTemp === null) {
-          document.getElementById('heroWeather').style.display = 'none';
-        }
+        // Static fallback stays visible — no need to hide the widget
+        if (lastTemp !== null) renderWeather(); // Use cached data if available
       }
     }
 
@@ -1096,7 +1168,7 @@
       if (!el) return;
 
       if (lastTemp === null || lastWeatherCode === null) {
-        el.textContent = currentLang === 'el' ? 'Μαστιχάρι · Φόρτωση...' : 'Mastichari · Loading...';
+        // Static fallback already set by fetchLiveWeather, do nothing
         return;
       }
 
@@ -1196,6 +1268,7 @@
 
       renderWeather();
       updateHouseRulesTime();
+      if (window.lucide) lucide.createIcons();
     }
 
     function updateHouseRulesTime() {
@@ -1211,6 +1284,18 @@
           ? `${QUIET_HOURS} ώρες κοινής ησυχίας`
           : `${QUIET_HOURS} quiet hours observed`;
       }
+    }
+
+    function renderPlatformBadges() {
+      const abScore = document.getElementById('airbnbScoreVal');
+      if (abScore && AIRBNB_SCORE) abScore.textContent = AIRBNB_SCORE;
+      const abRev = document.getElementById('airbnbReviewsVal');
+      if (abRev && AIRBNB_REVIEWS) abRev.textContent = AIRBNB_REVIEWS;
+
+      const bkScore = document.getElementById('bookingScoreVal');
+      if (bkScore && BOOKING_SCORE) bkScore.textContent = BOOKING_SCORE;
+      const bkRev = document.getElementById('bookingReviewsVal');
+      if (bkRev && BOOKING_REVIEWS) bkRev.textContent = BOOKING_REVIEWS;
     }
 
     // SCROLL REVEAL UTIL
