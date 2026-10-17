@@ -80,12 +80,158 @@
     let activeLightboxIndex = 0;
     let activeGalleryIndex = 0;
 
-    // Testimonials database
+    // Testimonials database - Real verified Airbnb reviews
     const reviewsData = [
-      { av: "Μ", name: "Maria K.", date_el: "Ιούνιος 2025", date_en: "June 2025", text_el: "Εκπληκτικό μέρος! Ο χώρος απόλυτα καθαρός, ο οικοδεσπότης πολύ ανταποκρίσιμος. Σίγουρα θα ξαναέρθουμε.", text_en: "Amazing place! The space was absolutely clean, and the host was very responsive. We will definitely come back." },
-      { av: "J", bg: "#4A5568", name: "James & Laura", date_el: "Αύγουστος 2025", date_en: "August 2025", text_el: "Τέλειο μικρό στούντιο για ρομαντική απόδραση. Πολύ ήσυχο και γαλήνιο, η κουζίνα είχε όλα όσα χρειαζόμασταν.", text_en: "Perfect little studio for a romantic getaway. Very quiet and peaceful, the kitchen had everything we needed." },
-      { av: "Σ", bg: "#5A7A6A", name: "Σοφία Π.", date_el: "Σεπτέμβριος 2025", date_en: "September 2025", text_el: "Τέλεια εμπειρία! Ο χώρος ακριβώς όπως στις φωτογραφίες, ίσως και καλύτερος. Self check-in πολύ βολικό.", text_en: "Wonderful experience! The space is exactly like the photos, maybe even better. Self check-in was very convenient." },
-      { av: "T", bg: "#6B5B45", name: "Thomas B.", date_el: "Ιούλιος 2025", date_en: "July 2025", text_el: "Υπέροχη διαμονή! Γρήγορο WiFi, εξαιρετικό A/C, και η παραλία ήταν πολύ κοντά. Το συνιστώ ανεπιφύλακτα για ζευγάρια.", text_en: "Wonderful stay! Fast WiFi, great A/C, and the beach was a short walk. Highly recommend for couples." }
+      {
+        name: "Anne",
+        origin_el: "Μόναχο, Γερμανία",
+        origin_en: "Munich, Germany",
+        stay_el: "Μερικές διανυκτερεύσεις",
+        stay_en: "Few nights stay",
+        badge_el: "Επαληθευμένη Διαμονή",
+        badge_en: "Verified Stay",
+        date_el: "Πρόσφατα",
+        date_en: "Recent stay",
+        av: "A",
+        bg: "#B8965A",
+        text_el: "Μας άρεσε πάρα πολύ η διαμονή μας! Το διαμέρισμα είναι όμορφο, κομψά διακοσμημένο και σε τέλεια τοποθεσία, ακριβώς δίπλα στην παραλία και στο σημείο για καϊτσέρφινγκ, με πολλά εστιατόρια σε πολύ κοντινή απόσταση. Παρά το γεγονός ότι βρισκόταν σε τόσο κεντρικό σημείο, ήταν υπέροχα ήσυχα τη νύχτα και κοιμηθήκαμε πολύ καλά.\n\nΟ Σωκράτης ήταν απίστευτα ευπρόσδεκτος και φιλόξενος και μας έκανε να νιώσουμε σαν στο σπίτι μας από τη στιγμή που φτάσαμε. Αυτό ήταν ειλικρινά το αγαπημένο μου κατάλυμα στην Airbnb μέχρι τώρα! Περάσαμε πάρα πολύ ωραία και θα επιστρέφαμε σίγουρα. Συστήνεται ανεπιφύλακτα!",
+        text_en: "We absolutely loved our stay! The apartment is beautiful, stylishly decorated and in a perfect location right next to the beach and kitesurfing spot, with plenty of restaurants within walking distance. Despite being so central, it was wonderfully quiet at night and we slept very well.\n\nSocrates was an incredibly welcoming and hospitable host who made us feel at home from the moment we arrived. Honestly my favorite Airbnb stay to date! We had a wonderful time and would definitely return. Highly recommended!"
+      },
+      {
+        name: "Doruk",
+        origin_el: "3 χρόνια στην Airbnb",
+        origin_en: "3 years on Airbnb",
+        stay_el: "Μερικές διανυκτερεύσεις",
+        stay_en: "Few nights stay",
+        badge_el: "Επαληθευμένη Διαμονή",
+        badge_en: "Verified Stay",
+        date_el: "Αύγουστος 2026",
+        date_en: "August 2026",
+        av: "D",
+        bg: "#2C3E50",
+        text_el: "Το καλύτερο Airbnb που έχω μείνει ποτέ, αξίζει κάθε δεκάρα. Ο οικοδεσπότης ήταν πολύ φιλικός και φιλόξενος. Μας έδωσε προτάσεις για την περιοχή και ήταν πάντα έτοιμοι να μας βοηθήσουν. Το κατάλυμα ήταν πολύ καθαρό και ακριβώς όπως περιγραφόταν στις φωτογραφίες.\n\nΤο μέρος είναι πολύ κοντά στην παραλία — λιγότερο από ένα λεπτό με τα πόδια, με πολλά καλά εστιατόρια στη διαδρομή! Σίγουρα θα το πρότεινα! :)",
+        text_en: "The best Airbnb I have ever stayed at, worth every single penny. The host was very friendly and welcoming, giving us fantastic local tips. The apartment was spotless and exactly as described in the pictures.\n\nLess than a minute walk to the beach, with wonderful restaurants along the way! Definitely recommended! :)"
+      },
+      {
+        name: "Κατερίνα Μ.",
+        origin_el: "Επισκέπτης Airbnb",
+        origin_en: "Airbnb Guest",
+        stay_el: "Μερικές διανυκτερεύσεις",
+        stay_en: "Few nights stay",
+        badge_el: "Επαληθευμένη Διαμονή",
+        badge_en: "Verified Stay",
+        date_el: "Αύγουστος 2026",
+        date_en: "August 2026",
+        av: "Κ",
+        bg: "#5A7A6A",
+        text_el: "Πολύ όμορφη εμπειρία! Το κατάλυμα ήταν ολοκαίνουργιο, πολύ προσεγμένο και πλήρως εξοπλισμένο. Η τοποθεσία ήταν βολική, με ό,τι χρειάζεται κανείς σε κοντινή απόσταση.\n\nΟι οικοδεσπότες πολύ εξυπηρετικοί και φιλικοί, κάνοντας τη διαμονή μας ακόμη πιο ευχάριστη. Το συνιστώ ανεπιφύλακτα!",
+        text_en: "A truly wonderful experience! The studio was brand new, meticulously cared for and fully equipped. The location was super convenient with everything needed within walking distance.\n\nThe hosts were extremely helpful and friendly, making our stay a true delight. Highly recommended!"
+      },
+      {
+        name: "Serge",
+        origin_el: "8 χρόνια στην Airbnb",
+        origin_en: "8 years on Airbnb",
+        stay_el: "Μία διανυκτέρευση",
+        stay_en: "1 night stay",
+        badge_el: "Επαληθευμένη Διαμονή",
+        badge_en: "Verified Stay",
+        date_el: "Αύγουστος 2026",
+        date_en: "August 2026",
+        av: "S",
+        bg: "#6D597A",
+        text_el: "Ο Εμμανουήλ είναι ένας τέλειος οικοδεσπότης: πάντα γρήγορος στην απάντηση και πολύ εξυπηρετικός. Μας έκλεισε ευγενικά ένα ταξί για το αεροδρόμιο.\n\nΤο κατάλυμα είναι φιλόξενο και πολύ καθαρό και προσφέρει μια πολύ ωραία μικρή βεράντα. Θα το συνιστούσα ανεπιφύλακτα.",
+        text_en: "Emmanouil is a flawless host: always rapid to reply and immensely helpful. He kindly booked us a taxi for the airport.\n\nThe studio is welcoming and very clean, featuring a lovely private terrace. I recommend it without hesitation."
+      },
+      {
+        name: "Alma",
+        origin_el: "11 χρόνια στην Airbnb",
+        origin_en: "11 years on Airbnb",
+        stay_el: "Διαμονή >1 εβδομάδα",
+        stay_en: "Stay > 1 week",
+        badge_el: "Επαληθευμένη Διαμονή",
+        badge_en: "Verified Stay",
+        date_el: "Αύγουστος 2026",
+        date_en: "August 2026",
+        av: "A",
+        bg: "#8C6D53",
+        text_el: "Πολύ φιλικοί και εξαιρετικά εξυπηρετικοί οικοδεσπότες! Όλα ήταν ολοκαίνουργια, πολύ καθαρά και η κουζίνα ήταν καλά εξοπλισμένη.\n\nΤο κατάλυμα βρίσκεται ακριβώς δίπλα στην παραλία και υπάρχουν μερικά εστιατόρια/ταβέρνες στην περιοχή. Το προτείνω ανεπιφύλακτα!",
+        text_en: "Very friendly and exceptionally helpful hosts! Everything was brand new, spotless, and the kitchen was well-equipped.\n\nThe studio is located right next to the beach with lovely restaurants and tavernas in the immediate area. Highly recommended!"
+      },
+      {
+        name: "Paul",
+        origin_el: "14 χρόνια στην Airbnb",
+        origin_en: "14 years on Airbnb",
+        stay_el: "Μία διανυκτέρευση",
+        stay_en: "1 night stay",
+        badge_el: "Επαληθευμένη Διαμονή",
+        badge_en: "Verified Stay",
+        date_el: "Πρόσφατα",
+        date_en: "Recent stay",
+        av: "P",
+        bg: "#386641",
+        text_el: "Απολαύσαμε μια ήσυχη διαμονή μίας νύχτας. Το διαμέρισμα ήταν βολικό για το επόμενο ταξίδι μας στην Κάλυμνο. Το διαμέρισμα ήταν πολύ άνετο, με κομψό μπάνιο και κουζίνα.\n\nΟ Σωκράτης ήταν πολύ εξυπηρετικός και μάλιστα μας παρέλαβε ευγενικά από το αεροδρόμιο.",
+        text_en: "We enjoyed a quiet one-night stay. The apartment was very convenient for our onward journey to Kalymnos. Very comfortable, with a stylish bathroom and kitchen.\n\nSocrates was extremely helpful and even kindly picked us up from the airport."
+      },
+      {
+        name: "Gülşah",
+        origin_el: "Σμύρνη, Τουρκία",
+        origin_en: "Izmir, Turkey",
+        stay_el: "Μερικές διανυκτερεύσεις",
+        stay_en: "Few nights stay",
+        badge_el: "Επαληθευμένη Διαμονή",
+        badge_en: "Verified Stay",
+        date_el: "Πρόσφατα",
+        date_en: "Recent stay",
+        av: "G",
+        bg: "#B8965A",
+        text_el: "Το σπίτι ήταν υπέροχο, υπήρχαν ωραία μέρη σε κοντινή απόσταση. Η θάλασσα βρισκόταν λίγα βήματα μακριά. Ήταν ένας πολύ καθαρός και όμορφα διακοσμημένος χώρος, οι ανάγκες είχαν ληφθεί πολύ καλά υπόψη. Όλα ήταν ευχάριστα και ήταν μια διαμονή χωρίς κανένα πρόβλημα.",
+        text_en: "The house was wonderful, with great spots nearby. The sea was literally just steps away. It was a very clean and beautifully decorated space where all needs had been thoughtfully taken care of. A delightful, completely smooth stay."
+      },
+      {
+        name: "Jula",
+        origin_el: "9 χρόνια στην Airbnb",
+        origin_en: "9 years on Airbnb",
+        stay_el: "Μία διανυκτέρευση",
+        stay_en: "1 night stay",
+        badge_el: "Επαληθευμένη Διαμονή",
+        badge_en: "Verified Stay",
+        date_el: "Σεπτέμβριος 2026",
+        date_en: "September 2026",
+        av: "J",
+        bg: "#4A5568",
+        text_el: "Μας άρεσε πολύ το κατάλυμα. Βρίσκεται ακριβώς σε ένα από τα σοκάκια του Μαστιχαρίου, ανάμεσα σε διάφορα καταστήματα. Όλα είναι προσβάσιμα με τα πόδια. Μας φρόντισαν καλά επί τόπου, απαντούσαν γρήγορα και με ευελιξία. Οι οικοδεσπότες κάνουν τα πάντα για να νιώθεις άνετα.",
+        text_en: "We thoroughly enjoyed our stay. Situated right in the alleys of Mastichari, amidst shops and eateries. Everything is accessible on foot. We were well taken care of on site, with quick and flexible responses. The hosts do everything to make you feel at home."
+      },
+      {
+        name: "Danda",
+        origin_el: "11 χρόνια στην Airbnb",
+        origin_en: "11 years on Airbnb",
+        stay_el: "Μία διανυκτέρευση",
+        stay_en: "1 night stay",
+        badge_el: "Επαληθευμένη Διαμονή",
+        badge_en: "Verified Stay",
+        date_el: "Σεπτέμβριος 2026",
+        date_en: "September 2026",
+        av: "D",
+        bg: "#2B2D42",
+        text_el: "Νέο στούντιο, πεντακάθαρο και άριστα εξοπλισμένο. Οι πολύ ευγενικοί ιδιοκτήτες μας έκαναν να νιώσουμε σαν στο σπίτι μας!",
+        text_en: "Brand new studio, spotless and excellently equipped. The very kind owners made us feel right at home!"
+      },
+      {
+        name: "Rebecca",
+        origin_el: "8 χρόνια στην Airbnb",
+        origin_en: "8 years on Airbnb",
+        stay_el: "Μία διανυκτέρευση",
+        stay_en: "1 night stay",
+        badge_el: "Επαληθευμένη Διαμονή",
+        badge_en: "Verified Stay",
+        date_el: "Πρόσφατα",
+        date_en: "Recent stay",
+        av: "R",
+        bg: "#5A7A6A",
+        text_el: "Μείναμε εδώ για μία διανυκτέρευση στην Κω για να πάρουμε το ταχύπλοο για την Κάλυμνο το επόμενο πρωί. Ήταν μια ωραία σύντομη διαμονή, και οι οικοδεσπότες ήταν πολύ φιλικοί. Θα το πρότεινα σε όποιον αναζητά έναν ωραίο, κεντρικό χώρο στο Μαστιχάρι.",
+        text_en: "We stayed here for one night in Kos to catch the speed boat to Kalymnos the next morning. It was a lovely short stay, and the hosts were very friendly. Highly recommended for anyone seeking a great, central spot in Mastichari."
+      }
     ];
     let activeReviewIndex = 0;
 
@@ -123,7 +269,14 @@
         rule_pets: "Όχι Κατοικίδια", rule_pets_desc: "Δεν επιτρέπονται τα κατοικίδια",
         rule_quiet: "Ησυχία", rule_quiet_desc: "22:00 – 09:00 ήσυχες ώρες",
         rule_guests: "Max 3 επισκέπτες", rule_guests_desc: "Ιδανικό για οικογένειες ή μικρές παρέες",
-        reviews_eyebrow: "Τι Λένε οι Επισκέπτες", reviews_title: "Κριτικές.", reviews_score_meta: "από 5.00<br>48 κριτικές",
+        reviews_eyebrow: "Εμπειρίες & Κριτικές",
+        reviews_title: "Ιστορίες <em>Φιλοξενίας.</em>",
+        reviews_score_meta: "από 5.00 · 19 επαληθευμένες κριτικές",
+        rev_pill_clean: "100% Άριστη Καθαριότητα",
+        rev_pill_beach: "30μ από την Παραλία",
+        rev_pill_host: "Αυθεντική Φιλοξενία",
+        rev_pill_checkin: "Εύκολο Self Check-in",
+        reviews_view_airbnb: "Δείτε όλες στο Airbnb",
         faq_eyebrow: "Συχνές Ερωτήσεις", faq_title: "Συχνές Ερωτήσεις.",
         faq_q1: "Πώς γίνεται η παραλαβή των κλειδιών;", faq_a1: "Παρέχουμε σύστημα self check-in μέσω έξυπνης κλειδαιάς (smart lock). Θα λάβετε τον προσωπικό σας κωδικό πρόσβασης 24 ώρες πριν την άφιξή σας.",
         faq_q2: "Υπάρχει διαθέσιμο πάρκινγκ;", faq_a2: "Ναι, υπάρχει ελεύθερο πάρκινγκ κοντά στο σπίτι (χωρίς χρέωση).",
@@ -193,7 +346,14 @@
         rule_pets: "No Pets", rule_pets_desc: "Pets are not allowed in the property",
         rule_quiet: "Quiet Hours", rule_quiet_desc: "22:00 – 09:00 quiet hours observed",
         rule_guests: "Max 3 Guests", rule_guests_desc: "Ideal for small families or friends",
-        reviews_eyebrow: "What Guests Say", reviews_title: "Reviews.", reviews_score_meta: "out of 5.00<br>48 reviews",
+        reviews_eyebrow: "Experiences & Feedback",
+        reviews_title: "Guest <em>Stories.</em>",
+        reviews_score_meta: "out of 5.00 · 19 verified reviews",
+        rev_pill_clean: "100% Spotless Cleanliness",
+        rev_pill_beach: "30m to the Beach",
+        rev_pill_host: "Heartfelt Hospitality",
+        rev_pill_checkin: "Seamless Self Check-in",
+        reviews_view_airbnb: "Read all on Airbnb",
         faq_eyebrow: "Frequently Asked", faq_title: "FAQs.",
         faq_q1: "How do I collect the keys?", faq_a1: "We provide self check-in via a smart lock. You will receive your personal access code 24 hours prior to your scheduled check-in.",
         faq_q2: "Is parking available?", faq_a2: "Yes, there is free of charge public parking near the house.",
@@ -1065,61 +1225,172 @@
       updateGalleryIndicators();
     }
 
-    // REVIEWS CAROUSEL BUILDER
+    // REVIEWS CAROUSEL BUILDER & ENGINE
+    function getVisibleReviewCards() {
+      if (window.innerWidth >= 860) return 2;
+      return 1;
+    }
+
     function buildReviewsCarousel() {
       const track = document.getElementById('reviewsTrack');
       const indContainer = document.getElementById('reviewsIndicators');
+      if (!track || !indContainer) return;
+
       track.innerHTML = '';
       indContainer.innerHTML = '';
 
-      reviewsData.forEach((rev, index) => {
-        const date = currentLang === 'el' ? rev.date_el : rev.date_en;
+      const visibleCards = getVisibleReviewCards();
+      const maxIndex = Math.max(0, reviewsData.length - visibleCards);
+
+      reviewsData.forEach((rev) => {
         const text = currentLang === 'el' ? rev.text_el : rev.text_en;
+        const origin = currentLang === 'el' ? rev.origin_el : rev.origin_en;
+        const stay = currentLang === 'el' ? rev.stay_el : rev.stay_en;
+        const badge = currentLang === 'el' ? (rev.badge_el || 'Επαληθευμένη Διαμονή') : (rev.badge_en || 'Verified Stay');
+        const date = currentLang === 'el' ? rev.date_el : rev.date_en;
         const bgStyle = rev.bg ? `style="background:${rev.bg}"` : '';
 
+        const paragraphs = text.split('\n\n').map(p => `<p class="review-text-para">${p.trim()}</p>`).join('');
+
         const slide = document.createElement('div');
-        slide.className = `review-slide ${index === 0 ? 'active' : ''}`;
+        slide.className = 'review-slide-card';
         slide.innerHTML = `
-        <div class="review-card">
-          <div class="reviewer-row">
-            <div class="reviewer-av" ${bgStyle}>${rev.av}</div>
-            <div>
-              <div class="reviewer-name">${rev.name}</div>
-              <div class="reviewer-date">${date}</div>
+          <div class="review-card">
+            <div class="review-card-top">
+              <div class="reviewer-meta-group">
+                <div class="reviewer-av" ${bgStyle}>${rev.av}</div>
+                <div>
+                  <div class="reviewer-name-row">
+                    <span class="reviewer-name">${rev.name}</span>
+                    <span class="reviewer-verified-tag" title="${badge}">
+                      <i data-lucide="shield-check" class="rev-shield-icon"></i>
+                    </span>
+                  </div>
+                  <div class="reviewer-origin">${origin}</div>
+                </div>
+              </div>
+              <div class="review-platform-tag">
+                <img src="images/airbnblogo.svg" alt="Airbnb" class="rev-card-airbnb-logo" />
+                <span>Airbnb</span>
+              </div>
+            </div>
+
+            <div class="review-rating-row">
+              <div class="review-stars">★★★★★</div>
+              <div class="review-stay-pill">${stay}</div>
+            </div>
+
+            <div class="review-quote-icon">“</div>
+            <div class="review-body">
+              ${paragraphs}
+            </div>
+
+            <div class="review-card-footer">
+              <span class="review-date-tag">${date}</span>
+              <span class="review-status-confirmed">
+                <i data-lucide="check" class="rev-check-icon"></i>
+                ${badge}
+              </span>
             </div>
           </div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">${text}</p>
-        </div>
-      `;
+        `;
         track.appendChild(slide);
-
-        const dot = document.createElement('div');
-        dot.className = `rev-indicator ${index === 0 ? 'active' : ''}`;
-        dot.setAttribute('onclick', `jumpToReview(${index})`);
-        indContainer.appendChild(dot);
       });
+
+      // Indicators: 1 dot per navigable index
+      for (let i = 0; i <= maxIndex; i++) {
+        const dot = document.createElement('div');
+        dot.className = `rev-indicator ${i === activeReviewIndex ? 'active' : ''}`;
+        dot.setAttribute('onclick', `jumpToReview(${i})`);
+        dot.setAttribute('aria-label', `Review ${i + 1}`);
+        indContainer.appendChild(dot);
+      }
+
+      jumpToReview(activeReviewIndex);
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
     }
 
     function moveReviews(dir) {
+      const visibleCards = getVisibleReviewCards();
+      const maxIndex = Math.max(0, reviewsData.length - visibleCards);
       let target = activeReviewIndex + dir;
-      if (target < 0) target = reviewsData.length - 1;
-      if (target >= reviewsData.length) target = 0;
+      if (target < 0) target = maxIndex;
+      if (target > maxIndex) target = 0;
       jumpToReview(target);
     }
 
     function jumpToReview(index) {
+      const visibleCards = getVisibleReviewCards();
+      const maxIndex = Math.max(0, reviewsData.length - visibleCards);
+      if (index < 0) index = 0;
+      if (index > maxIndex) index = maxIndex;
+
       activeReviewIndex = index;
-      document.querySelectorAll('.review-slide').forEach((slide, idx) => {
-        if (idx === index) slide.classList.add('active');
-        else slide.classList.remove('active');
-      });
+      const track = document.getElementById('reviewsTrack');
+      if (track) {
+        let cardWidthPct = 50;
+        if (visibleCards === 1) cardWidthPct = 100;
+        const gap = 20;
+        track.style.transform = `translateX(calc(-${index * cardWidthPct}% - ${index * (gap / visibleCards)}px))`;
+      }
 
       document.querySelectorAll('.rev-indicator').forEach((dot, idx) => {
         if (idx === index) dot.classList.add('active');
         else dot.classList.remove('active');
       });
     }
+
+    // Auto-scroll with pause on interaction
+    let reviewAutoTimer = null;
+    function startReviewAutoTimer() {
+      if (reviewAutoTimer) clearInterval(reviewAutoTimer);
+      reviewAutoTimer = setInterval(() => {
+        moveReviews(1);
+      }, 7000);
+    }
+    startReviewAutoTimer();
+
+    // Window resize observer for responsive layout adjustments
+    window.addEventListener('resize', () => {
+      const indContainer = document.getElementById('reviewsIndicators');
+      if (indContainer) {
+        const visibleCards = getVisibleReviewCards();
+        const maxIndex = Math.max(0, reviewsData.length - visibleCards);
+        if (indContainer.children.length !== (maxIndex + 1)) {
+          buildReviewsCarousel();
+        } else {
+          jumpToReview(activeReviewIndex);
+        }
+      }
+    });
+
+    // Mobile touch gestures for reviews carousel
+    (function initReviewSwipe() {
+      const viewport = document.querySelector('.reviews-carousel-viewport');
+      if (!viewport) return;
+      let startX = 0;
+      viewport.addEventListener('touchstart', (e) => {
+        if (reviewAutoTimer) clearInterval(reviewAutoTimer);
+        startX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      viewport.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].screenX;
+        const diff = startX - endX;
+        if (Math.abs(diff) > 40) {
+          moveReviews(diff > 0 ? 1 : -1);
+        }
+        startReviewAutoTimer();
+      }, { passive: true });
+      viewport.addEventListener('mouseenter', () => {
+        if (reviewAutoTimer) clearInterval(reviewAutoTimer);
+      });
+      viewport.addEventListener('mouseleave', () => {
+        startReviewAutoTimer();
+      });
+    })();
 
     // FAQ COLLAPSIBLE TOGGLE
     function toggleFaq(buttonElement) {
